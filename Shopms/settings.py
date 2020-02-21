@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'userapp',
     'productapp',
     'msgapp',
-    'countapp',
+    'cartapp',
+    'indentapp',
+    'manageapp',
 ]
 
 MIDDLEWARE = [
@@ -81,12 +83,12 @@ WSGI_APPLICATION = 'Shopms.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST':'localhost',
+        'HOST':'123.57.57.191',
         'PORT':3306,
         'USER':'root',
         'PASSWORD':'123456',
         'CHARSET':'utf8',
-        'NAME':'shopms'
+        'NAME':'mydb'
     }
 }
 
