@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 from indentapp.models import Indent
@@ -25,3 +27,35 @@ class Comment(models.Model):
 
     class Meta:
         managed = False
+
+class Message(models.Model):
+    message_id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=50, blank=True, null=True)
+    content = models.TextField(blank=True, null=True)
+    link_url = models.CharField(max_length=100, blank=True, null=True)
+    create_time = models.DateTimeField(auto_created=True, blank=True)
+    note = models.TextField(blank=True, null=True)
+
+    states = (
+        (0, '审核中'),
+        (1, '已通过'),
+        (2, '未通过')
+    )
+    state = models.IntegerField(choices=states, default=0)
+
+    @property
+    def state_label(self):
+        return self.states[self.state][-1]
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+
+        if self.create_time is None:
+            self.create_time = datetime.time()
+
+        super(Message, self).save()
+
+    class Meta:
+        managed = False
+        db_table = 'message'
+        ordering = ['-create_time']

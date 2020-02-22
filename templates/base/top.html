@@ -1,0 +1,66 @@
+<div class="topheader">
+        <div class="left">
+            <h1 class="logo">SHOP<span>在家马上购物</span></h1>
+            <span class="slogan">管理系统</span>
+
+            <div class="search">
+            	<form action="" method="post">
+                	<input type="text" name="keyword" id="keyword" value="请输入" />
+                    <button class="submitbutton"></button>
+                </form>
+            </div><!--search-->
+
+            <br clear="all" />
+
+        </div><!--left-->
+
+        <div class="right">
+            <div class="userinfo">
+            	<img id="head_small" src="{% if request.session.login_user.head %}/m/{{ request.session.login_user.head }}{% else %}/s/images/thumbs/avatar.png{% endif %}" alt="" />
+                <span>{{ request.session.login_user.name }}</span>
+            </div><!--userinfo-->
+
+            <div class="userinfodrop">
+            	<div class="avatar">
+                	<a href="">
+                        <img id="head_big" src="{% if request.session.login_user.head %}/m/{{ request.session.login_user.head }}{% else %}/s/images/thumbs/avatarbig.png{% endif %}" alt="" />
+                    </a>
+                    <div class="changetheme">
+                    	切换主题: <br />
+                    	<a class="default"></a>
+                        <a class="blueline"></a>
+                        <a class="greenline"></a>
+                        <a class="contrast"></a>
+                        <a class="custombg"></a>
+                    </div>
+                </div><!--avatar-->
+                <div class="userdata">
+                	<h4>{{ request.session.login_user.name }}</h4>
+                    <h6></h6>
+                    <span class="email">{{ request.session.login_user.mail }}</span>
+                    <ul>
+                    	<li><a href="editprofile.html">编辑资料</a></li>
+                        <li><a href="help.html">帮助</a></li>
+                        <li><a href="/logout/">退出</a></li>
+                    </ul>
+                </div><!--userdata-->
+            </div><!--userinfodrop-->
+        </div><!--right-->
+    </div><!--topheader-->
+
+
+ <div class="header">
+    	<ul class="headermenu">
+        	<li class="current"><a href="/"><span class="icon icon-flatscreen"></span>首页</a></li>
+            <li><a href="messages.html"><span class="icon icon-message"></span>查看消息</a></li>
+
+            {% if request.session.login_user.code == 'admin' or request.session.login_user.code == 'mgr' %}
+                 <li><a href="reports.html"><span class="icon icon-chart"></span>统计信息<span class="">1</span></a></li>
+            {% endif %}
+        </ul>
+
+       <div class="headerwidget">
+
+        </div><!--headerwidget-->
+
+    </div><!--header-->
