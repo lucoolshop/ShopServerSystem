@@ -40,7 +40,7 @@
                         {% csrf_token %}
                         <input type="text" name="username" class="longinput {% if errors.username %}error{% endif %}"
                                value="{% if obj %}{{ obj.username }}{% else %}{{ form.username.value }}{% endif %}"/>
-                         <input type="hidden" name="id" value="{{ id_ }}">
+                         <input type="hidden" name="id" value="{{ sys_id }}">
                     </span>
                 </p>
                 <p>

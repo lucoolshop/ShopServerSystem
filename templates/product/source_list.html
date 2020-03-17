@@ -1,0 +1,83 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    货源管理
+{% endblock %}
+
+{% block content %}
+
+    <div class="centercontent tables">
+
+        <div class="pageheader notab">
+            <h1 class="pagetitle">当前位置：货源管理</h1>
+            <span class="pagedesc">货源的详细信息</span>
+
+        </div><!--pageheader-->
+
+        <div style="margin: 10px">
+            <div class="contenttitle2">
+                <h3>货源管理</h3>
+            </div><!--contenttitle-->
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                <thead>
+                <tr>
+                    <th class="head0">货源ID</th>
+                    <th class="head1">进货时间</th>
+                    <th class="head1">进货电话</th>
+                    <th class="head1">货源产品</th>
+                    <th class="head1">货源数量</th>
+                    <th class="head1">进货地址</th>
+                    <th class="head1">货源单价</th>
+                    <th class="head1">产品总花费</th>
+                    <th class="head1">产品备注</th>
+                    <th class="head1" style="width: 300px">操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for source in sources %}
+                    <tr class="gradeA">
+                        <td>{{ source.id }}</td>
+                        <td>{{ source.create_time}}</td>
+                        <td>{{ source.source_telephone}}</td>
+                        <td>{{ source.source_product_name }}</td>
+                        <td>{{ source.source_number }}</td>
+                        <td>{{ source.source_address }}</td>
+                        <td>{{ source.unit_price}}</td>
+                        <td>{{ source.total_price }}</td>
+                        <td>{{ source.note }}</td>
+                        <td class="center">
+                            <button class="stdbtn" onclick="edit_({{ source.id }})">编辑</button>
+                            <button class="stdbtn btn_yellow" onclick="delete_({{ source.id }}, '{{ source.source_product_name }}')">删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <div style="padding: 5px">
+                <button class="stdbtn btn_blue" onclick="window.open('/edit_source/', target='_self')">新增</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        function delete_(source_id, source_name) {
+            jConfirm('是否确认删除' + source_name + "?", '删除确认', function (event) {
+                if (event) {
+                    url = '?action=del&source_id=' + source_id
+                    console.log(url)
+                    window.open(url, target = '_self')
+                }
+            })
+        }
+
+        function edit_(source_id){
+            open('/edit_source/?source_id='+source_id, targt='_self')
+        }
+
+    </script>
+{% endblock %}

@@ -1,7 +1,6 @@
-import datetime
+from datetime import datetime
 
 from django.db import models
-
 from indentapp.models import Indent
 from userapp.models import User
 
@@ -29,11 +28,11 @@ class Comment(models.Model):
         managed = False
 
 class Message(models.Model):
-    message_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=50, blank=True, null=True)
     content = models.TextField(blank=True, null=True)
+    create_time = models.DateTimeField()
     link_url = models.CharField(max_length=100, blank=True, null=True)
-    create_time = models.DateTimeField(auto_created=True, blank=True)
     note = models.TextField(blank=True, null=True)
 
     states = (
@@ -49,9 +48,8 @@ class Message(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
         if self.create_time is None:
-            self.create_time = datetime.time()
+            self.create_time = datetime.now()
 
         super(Message, self).save()
 

@@ -34,9 +34,9 @@
                 <tbody>
                 {% for obj in objs %}
                     <tr class="gradeA">
-                        <td>{{ obj.message_id }}</td>
+                        <td>{{ obj.id }}</td>
                         <td>{{ obj.title }}</td>
-                        <td>{{ obj.content|dot_info|safe }}</td>
+                        <td>{{ obj.content}}</td>
                         <td >{{ obj.create_time }}</td>
                         <td><a style="cursor: pointer" onclick="window.open('{{ obj.link_url }}')">查看连接</a></td>
                         <td ><span {% if obj.state == 2 %}onclick="jAlert('{{ obj.note }}', '提示')" style="cursor: pointer" {% endif %}>{{ obj.state_label }}</span></td>

@@ -1,0 +1,174 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    库存管理
+{% endblock %}
+
+{% block css %}
+    <script type="text/javascript" src="/s/js/custom/forms.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="centercontent tables">
+
+        <div class="pageheader notab">
+            <h1 class="pagetitle">当前位置：库存管理</h1>
+            <span class="pagedesc">库存信息录入</span>
+
+        </div><!--pageheader-->
+
+        <div id="basicform " style="margin: 10px" class="messagebox">
+            <div class="contenttitle2">
+                <h3>{% if source_id %}编辑{% else %}新增{% endif %}商品记录</h3>
+            </div><!--contenttitle-->
+
+            {% if errors %}
+                <ul style="list-style: none;margin: 5px;padding: 5px;">
+
+                    {% for error in errors.values %}
+                        <li style="color:red"> <span class="circle-dot-red"></span> {{ error.0.message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form class="stdform stdform2" enctype="multipart/form-data" action="#" method="post">
+
+                <p style="display: none">
+                    <span class="field">
+                        <input type="text" name="is_update" class="longinput" value="{% if product %}is_update{% else %}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>商品ID</label>
+                    <span class="field">
+                        <input type="text" name="product_id" class="longinput" value="{% if product %}{{ product.product_id }}{% else %}{{ form.code.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>货源ID</label>
+                    <span class="field">
+{#                        <input type="text" name="source_id" class="longinput" value="{% if product %}{{ product.source_id }}{% else %}{{ form.code.value }}{% endif %}"/>#}
+                        <select  name="source_id">
+                            {% for source in sources %}
+                                <option value="{{ source.id }}"
+                                {% if product.source_id == source.id%}selected="selected"{% else %}{% endif %}>
+                                    {{ source.id }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </span>
+                </p>
+
+                <p>
+                    <label>商品类名</label>
+                    <span class="field" >
+{#                        <input type="text" name="category_name" class="longinput" value="{{ category.category_name }}"/>#}
+                        <select  name="category_name">
+                            {% for category in categorys %}
+                                <option value="{{ category.category_name }}"
+                                {% if product.category_name ==  category.category_name%}selected="selected"{% else %}{% endif %}>
+                                    {{ category.category_name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </span>
+                </p>
+
+                <p>
+                    <label>商品图片</label>
+                    <span class="field">
+                        <input type="file" name="product_img" />
+                        <img style="width: 80px; height: 80px" src="{% if product %}{{ product.product_img }}{% else %}/s/images/thumbs/avatarbig.png{% endif %}" />
+                    </span>
+                </p>
+
+                <p>
+                    <label>商品名</label>
+                    <span class="field">
+                        <select  name="source_product_name">
+                            {% for source in sources %}
+                                <option value="{{ source.source_product_name }}"
+                                {% if product.source_id == source.id%}selected="selected"{% else %}{% endif %}>
+                                    {{ source.source_product_name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </span>
+                </p>
+
+                <p>
+                    <label>商品出售价</label>
+                    <span class="field">
+                        <input type="text" name="product_priceout" class="longinput" value="{% if product %}{{ product.product_priceout }}{% else %}{{ form.code.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>商品详细名称</label>
+                    <span class="field">
+                        <input type="text" name="product_longname" class="longinput" value="{% if product %}{{ product.product_longname }}{% else %}{{ form.code.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>商品存储量</label>
+                    <span class="field">
+                        {% csrf_token %}
+                        <input type="text" name="product_storenum" class="longinput" value="{% if product %}{{ product.product_storenum }}{% else %}{{ form.name.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>商品出售量</label>
+                    <span class="field">
+                        {% csrf_token %}
+                        <input type="text" name="product_numout" class="longinput" value="{% if product %}{{ product.product_numout }}{% else %}{{ form.name.value }}{% endif %}"/>
+
+                    </span>
+                </p>
+
+                <p>
+                    <label>生产日期</label>
+                    <span class="field">
+                        {% csrf_token %}
+                        <input type="text" name="product_time" class="longinput" value="{% if product %}{{ product.product_time }}{% else %}{{ form.name.value }}{% endif %}"/>
+
+                    </span>
+                </p>
+
+                <p>
+                    <label>保质期</label>
+                    <span class="field">
+                        {% csrf_token %}
+                        <input type="text" name="product_expiretime" class="longinput" value="{% if product %}{{ product.product_expiretime }}{% else %}{{ form.name.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p class="stdformbutton">
+                    <button class="submit radius2">提交</button>
+
+                </p>
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        function delete_(product_id, product_name) {
+            jConfirm('是否确认删除' + product_name + "?", '删除确认', function (event) {
+                if (event) {
+                    url = '?action=del&product=' + product_id
+                    console.log(url)
+                    open(url, target = '_self')
+                }
+            })
+        }
+    </script>
+{% endblock %}

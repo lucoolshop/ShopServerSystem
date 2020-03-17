@@ -403,7 +403,7 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 .vernav2 ul { list-style: none; margin: 0; }
 .vernav2 ul li { display: block; border-bottom: 1px solid #eee; position: relative; }
 .vernav2 ul li a { 
-	display: block; padding: 9px 10px; background: #fff; font-family: 'RobotoBoldCondensed', Arial, Helvetica, sans-serif; color: #32415a; 
+	display: block; padding: 9px 10px; background: #fff; font-family: 'RobotoBoldCondensed', Arial, Helvetica, sans-serif; color: #32415a;
 	text-transform: uppercase; 
 }
 .vernav2 ul li a:hover { background-color: #fcfcfc; }
@@ -445,7 +445,7 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 .iconmenu ul li a.addons { background-position: 8px -638px; }
 .iconmenu ul li a.inbox { background-position: 8px -708px; }
 .iconmenu ul li a.drafts { background-position: 8px -780px; }
-.iconmenu ul li a.sent { background-position: 8px -853px; }
+.iconmenu ul li a.users { background-position: 8px -853px; }
 .iconmenu ul li a.trash { background-position: 8px -923px; }
 
 .iconmenu ul li.current a.editor { background-position: 8px -24px; }

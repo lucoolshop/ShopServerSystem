@@ -1,0 +1,81 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    用户管理
+{% endblock %}
+
+{% block css %}
+    <script type="text/javascript" src="/s/js/custom/forms.js"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="centercontent tables">
+
+        <div class="pageheader notab">
+            <h1 class="pagetitle">当前位置：用户管理</h1>
+            <span class="pagedesc">对注册用户进行管理</span>
+
+        </div><!--pageheader-->
+
+        <div id="basicform " style="margin: 10px" class="messagebox">
+            <div class="contenttitle2">
+                <h3>{% if user_id %}编辑{% endif %}用户管理</h3>
+            </div><!--contenttitle-->
+
+            {% if errors %}
+                <ul style="list-style: none;margin: 5px;padding: 5px;">
+
+                    {% for error in errors.values %}
+                        <li style="color:red"> <span class="circle-dot-red"></span> {{ error.0.message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form class="stdform stdform2" method="post">
+
+                <p>
+                    <label>用户ID</label>
+                    <span class="field">
+                        <input type="text" name="user_id" class="longinput" value="{% if user %}{{ user.user_id }}{% else %}{{ form.code.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>用户头像</label>
+                    <span class="field">
+                        <input type="text" name="user_img" class="longinput" value="{% if user %}{{ user.user_img }}{% else %}{{ form.code.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>用户名字</label>
+                    <span class="field">
+                        <input type="text" name="user_name" class="longinput" value="{% if user %}{{ user.user_name }}{% else %}{{ form.code.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>用户密码</label>
+                    <span class="field">
+                        <input type="text" name="auth_string" class="longinput" value="{% if user %}{{ user.auth_string }}{% else %}{{ form.code.value }}{% endif %}"/>
+                    </span>
+                </p>
+
+                <p>
+                    <label>手机号</label>
+                    <span class="field">
+                        <input type="text" name="user_phone" class="longinput" value="{% if user %}{{ user.phone }}{% else %}{{ form.code.value }}{% endif %}"/>
+                    </span>
+                </p>
+                <p class="stdformbutton">
+                    <button class="submit radius2">提交</button>
+
+                </p>
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

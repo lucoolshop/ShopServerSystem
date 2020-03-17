@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    商品分类管理
+{% endblock %}
+
+{% block content %}
+
+    <div class="centercontent tables">
+
+        <div class="pageheader notab">
+            <h1 class="pagetitle">当前位置：分类管理</h1>
+            <span class="pagedesc">分类增、删、改、</span>
+
+        </div><!--pageheader-->
+
+        <div style="margin: 10px">
+            <div class="contenttitle2">
+                <h3>商品分类</h3>
+            </div><!--contenttitle-->
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                <thead>
+                <tr>
+                    <th class="head0">分类ID</th>
+                    <th class="head1">分类名称</th>
+                    <th class="head1" style="width: 300px">操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for category in categories %}
+                    <tr class="gradeA">
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.category_name }}</td>
+                        <td class="center">
+                            <button class="stdbtn" onclick="edit_({{ category.id }})">编辑</button>
+                            <button class="stdbtn btn_yellow" onclick="delete_({{ category.id }}, '{{ category.category_name }}')">删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <div style="padding: 5px">
+                <button class="stdbtn btn_blue" onclick="window.open('/edit_category/', target='_self')">新增</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        function delete_(category_id, category_name) {
+            jConfirm('是否确认删除' + category_name + "?", '删除确认', function (event) {
+                if (event) {
+                    url = '?action=del&category_id=' + category_id
+                    console.log(url)
+                    window.open(url, target = '_self')
+                }
+            })
+        }
+
+        function edit_(category_id){
+            open('/edit_category/?category_id='+ category_id, targt='_self')
+        }
+
+    </script>
+{% endblock %}

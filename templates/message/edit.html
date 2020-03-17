@@ -48,6 +48,7 @@
                                value="{% if obj %}{{ obj.link_url }}{% else %}{{ form.link_url.value }}{% endif %}"/>
                     </span>
                 </p>
+
                 <div id="id_info-wrapper">
                     <textarea name="content">{% if obj %}{{ obj.content|safe }}{% else %}
                         {{ form.content.value }}{% endif %}</textarea>

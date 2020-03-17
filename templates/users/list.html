@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    注册用户管理
+{% endblock %}
+
+{% block content %}
+
+    <div class="centercontent tables">
+
+        <div class="pageheader notab">
+            <h1 class="pagetitle">当前位置：用户管理</h1>
+            <span class="pagedesc">查看系统注册用户</span>
+
+        </div><!--pageheader-->
+
+        <div style="margin: 10px">
+            <div class="contenttitle2">
+                <h3>注册用户</h3>
+            </div><!--contenttitle-->
+            <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+                <thead>
+                <tr>
+                    <th class="head0">用户ID</th>
+                    <th class="head1">用户头像</th>
+                    <th class="head0">用户名字</th>
+                    <th class="head1">用户电话</th>
+                    <th class="head0" style="width: 300px">操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for user in users %}
+                    <tr class="gradeA">
+                        <td>{{ user.user_id }}</td>
+                        <td>{{ user.head }}</td>
+                        <td>{{ user.user_name }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td class="center">
+                            <button class="stdbtn btn_yellow" onclick="delete_({{ user.user_id }}, '{{ user.user_name }}')">拉黑用户</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        function delete_(user_id, user_name) {
+            jConfirm('是否确认删除' + user_name + "?", '删除确认', function (event) {
+                if (event) {
+                    url = '?action=del&user_id=' + user_id
+                    console.log(url)
+                    window.open(url, target = '_self')
+                }
+            })
+        }
+    </script>
+{% endblock %}

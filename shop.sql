@@ -227,7 +227,7 @@ alter table indent add constraint FK_Reference_3 foreign key (address_id)
       references user_address (address_id) on delete restrict on update restrict;
 
 alter table products add constraint FK_Reference_12 foreign key (source_id)
-      references source (source_id) on delete restrict on update restrict;
+      references source (id) on delete restrict on update restrict;
 
 alter table user_address add constraint FK_Reference_1 foreign key (user_id)
       references user (user_id) on delete restrict on update restrict;

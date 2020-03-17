@@ -4,12 +4,11 @@ from django.db import models
 
 class User(models.Model):
     user_id = models.IntegerField(primary_key=True)
-    user_img = models.CharField(max_length=256, blank=True, null=True)
+    head = models.CharField(max_length=256, blank=True, null=True)
     user_name = models.CharField(max_length=20)
-    user_password = models.CharField(max_length=20)
-    user_phone = models.IntegerField()
-    user_datetime = models.DateField()
-    isactive = models.IntegerField(blank=True, null=True)
+    auth_string = models.CharField(max_length=20)
+    phone = models.IntegerField()
+    create_time = models.DateTimeField()
 
     class Meta:
         managed = False
@@ -19,7 +18,7 @@ class UserAddress(models.Model):
     address_id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(User, models.DO_NOTHING)
     address = models.CharField(max_length=256)
-    telephone = models.IntegerField()
+    telephone = models.CharField(max_length=20)
 
     class Meta:
         managed = False
